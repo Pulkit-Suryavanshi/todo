@@ -8,9 +8,8 @@
     <style>
     .containerIframe {
     position: relative;
-    width: 100%;
     overflow: hidden;
-    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+    padding-top: 300px;
     }
 
     .responsive-iframe {
@@ -19,8 +18,8 @@
     left: 0;
     bottom: 0;
     right: 0;
-    width: 100%;
-    height: 100%;
+    width: 30%;
+    height: 30%;
     border: none;
     }
     </style>
@@ -78,7 +77,12 @@
                 <input type="text" class="form-control" id="title" aria-describedby="emailHelp">
                 <small id="emailHelp" class="form-text text-muted">Add an item to the list</small>
             </div>
-
+            <!--display calendar
+            <div class="containerIframe">
+            <iframe src="https://calendar.google.com/calendar/embed?height=350&wkst=1&bgcolor=%23ffffff&ctz=Asia%2FKolkata&showTitle=1&showPrint=0&src=ZW4uaW5kaWFuI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%230B8043" class="responsive-iframe"  frameborder="0" scrolling="no"></iframe>
+            </div>
+            -->
+            
             <div class="form-group">
                 <label for="description">Description</label>
                 <textarea class="form-control" id="description" rows="3"></textarea>
@@ -111,13 +115,6 @@
                 </tbody>
               </table>
         </div>
-    </div>
-
-    <!--display calendar-->
-    <div class="container my-4" id="CalendarIframe">
-    <div class="containerIframe">
-    <iframe src="https://calendar.google.com/calendar/embed?height=350&wkst=1&bgcolor=%23ffffff&ctz=Asia%2FKolkata&showTitle=1&showPrint=0&src=ZW4uaW5kaWFuI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%230B8043" class="responsive-iframe"  width="400" height="400" frameborder="0" scrolling="no"></iframe>
-    </div>
     </div>
     
     <div class="container my-4" id="Contact">
