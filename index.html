@@ -226,8 +226,7 @@
             }
             function edited(itemIndex){
                 let newDescription=prompt("You can Edit the description only:");
-                if(newDescription != null){
-
+                if(newDescription != ""){
                     //if(newDescription != null){alert(newDescription);}
                     //JSON.parse(itemJsonArrayStr)[itemIndex][1]=newDescription; //for changing the localstorage
                     retrievedItemsJson = localStorage.getItem("itemsJson");
