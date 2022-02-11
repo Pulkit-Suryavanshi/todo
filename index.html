@@ -49,7 +49,7 @@
                     <a class="nav-link" href="#Contact" tabindex="-1" aria-disabled="true">Contact</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
+                    <a class="nav-link" href="#items">Your Items</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -97,8 +97,8 @@
             <p style="display: inline;" id="DateTo">To: <input style="width:auto;" class="form-control" type="text" id="datepicker2" placeholder="Task End Date"></p>
             </div>
 
-            <button   id="add" class="btn btn-primary" >Add to list</button>
-            <button  id="clear" class="btn btn-primary" onclick="clearStorage()">Clear list</button>
+            <button   id="add" class="btn btn-primary" title="Add to the list">Add to list</button>
+            <button  id="clear" class="btn btn-primary" onclick="clearStorage()" title="Empty The list below">Clear list</button>
          
         <div>
         <div id="items" class="my-4">
@@ -199,8 +199,8 @@
                     <td>${element[1]}</td>
                     <td>${element[2]}</td>
                     <td>${element[3]}</td> 
-                    <td><button class="btn btn-sm btn-primary" onclick="edited(${index})">Edit</button></td> 
-                    <td><button class="btn btn-sm btn-primary" onclick="deleted(${index})">Delete</button></td>
+                    <td><button class="btn btn-sm btn-primary" title="Edit Description" onclick="edited(${index})">Edit</button></td> 
+                    <td><button class="btn btn-sm btn-primary" title="Delete This Task" onclick="deleted(${index})">Delete</button></td>
                     </tr>`; 
                 });
                 //<td><button class="btn btn-sm btn-primary" onclick="edited(${index})">Edit</button></td>
