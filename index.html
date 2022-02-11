@@ -113,6 +113,7 @@
                     <th scope="col">From Date</th> 
                     <th scope="col">To Date</th>
                     <th scope="col"></th> 
+                    <th scope="col"></th> 
                   </tr>
                 </thead>
                 <tbody id="tableBody">
@@ -225,14 +226,19 @@
             }
             function edited(itemIndex){
                 let newDescription=prompt("You can Edit the description only:");
-                //if(newDescription != null){alert(newDescription);}
-                //JSON.parse(itemJsonArrayStr)[itemIndex][1]=newDescription; //for changing the localstorage
-                retrievedItemsJson = localStorage.getItem("itemsJson");
-                arraysOfItems = JSON.parse(retrievedItemsJson);
-                arraysOfItems[itemIndex][1]=newDescription;//points to the description of this index items and sets new
-                const newArraysOfItems = JSON.stringify(arraysOfItems); // getting the whole itemsJson and stringify for read
-                localStorage.setItem("itemsJson", newArraysOfItems);
-                update(); //calling the update function
+                if(newDescription != null){
+
+                    //if(newDescription != null){alert(newDescription);}
+                    //JSON.parse(itemJsonArrayStr)[itemIndex][1]=newDescription; //for changing the localstorage
+                    retrievedItemsJson = localStorage.getItem("itemsJson");
+                    arraysOfItems = JSON.parse(retrievedItemsJson);
+                    arraysOfItems[itemIndex][1]=newDescription;//points to the description of this index items and sets new
+                    const newArraysOfItems = JSON.stringify(arraysOfItems); // getting the whole itemsJson and stringify for read
+                    localStorage.setItem("itemsJson", newArraysOfItems);
+                    update(); //calling the update function
+                }
+                else
+                {alert("Nothing Changed!");}
             }
             function clearStorage(){
                 if (confirm("Do you areally want to clear?")){
