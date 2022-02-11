@@ -4,7 +4,7 @@
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <style>
     
     .containerIframe {
@@ -100,9 +100,10 @@
             <button   id="add" class="btn btn-primary" >Add to list</button>
             <button  id="clear" class="btn btn-primary" onclick="clearStorage()">Clear list</button>
          
-
+        <div>
         <div id="items" class="my-4">
             <h2>Your Items</h2>
+            <div style="overflow-x:auto;">
             <table class="table">
                 <thead>
                   <tr>
@@ -126,7 +127,9 @@
                   
                 </tbody>
               </table>
+            </div>
         </div>
+        </div>  
     </div>
     
     <div class="container my-4" id="Contact">
