@@ -6,8 +6,26 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <style>
-    
-    .containerIframe {
+    body {
+    background-color: white;
+    color: black;
+    }
+
+    .dark-mode {
+    background-color: #041C32;
+    color: white;
+
+    }
+
+    .dark-mode-header{
+    color: white;
+    background-color: black;
+    }    
+
+    .contactClassNotToggeDarkMode{
+    color:black !important;
+    }
+    /*.containerIframe {
     position: relative;
     overflow: hidden;
     padding-top: 56.48%;
@@ -23,12 +41,14 @@
     height: 100%;
     border: none;
     }
+    */
     </style>
     
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
+    <!--fontawesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Pulkits TODOs List</title>
 </head>
 
@@ -54,13 +74,13 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Items
+                        Display Mode
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#"><button style="border-radius: 50%;" onclick="DarkToggle()"> <i class="fa fa-moon-o" aria-hidden="true"></i></button> Dark:click button</a>
+                        <a class="dropdown-item" href="#">New Mode</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" href="#">New Mode 2</a>
                     </div>
                 </li>
             </ul>
@@ -107,18 +127,18 @@
             <table class="table">
                 <thead>
                   <tr>
-                    <th scope="col">SNo</th>
-                    <th scope="col">Item Title</th>
-                    <th scope="col">Item Description</th>
-                    <th scope="col">From Date</th> 
-                    <th scope="col">To Date</th>
-                    <th scope="col"></th> 
-                    <th scope="col"></th> 
+                    <th class="th" scope="col">SNo</th>
+                    <th class="th" scope="col">Item Title</th>
+                    <th class="th" scope="col">Item Description</th>
+                    <th class="th" scope="col">From Date</th> 
+                    <th class="th" scope="col">To Date</th>
+                    <th class="th" scope="col"></th> 
+                    <th class="th" scope="col"></th> 
                   </tr>
                 </thead>
                 <tbody id="tableBody">
                   <tr>
-                    <th scope="row">1</th>
+                    <td scope="row">1</td>
                     <td>Get some Coffee</td>
                     <td>You need coffee as you are a coder</td>
                     <td>You need coffee as you are a coder</td> 
@@ -131,9 +151,26 @@
             </div>
         </div>
         </div>  
+        <div>
+            <iframe src="https://calendar.google.com/calendar/embed?height=350&wkst=1&bgcolor=%23ffffff&ctz=Asia%2FKolkata&showTitle=0&showPrint=0&showTz=0&showCalendars=0&src=ZW4uaW5kaWFuI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%230B8043" style="border-width:0" width="328" height="350" frameborder="0" scrolling="no"></iframe>
+        </div>
     </div>
-    
-    <div class="container my-4" id="Contact">
+    <script>
+        function DarkToggle() {
+           var element = document.body;
+           var tableHeader = document.getElementsByClassName("th");
+           var tableRow = document.getElementsByClassName("tr");
+           element.classList.toggle("dark-mode");
+           for(ele of tableHeader){
+               ele.classList.toggle("dark-mode-header");
+           }
+           for(ele of tableRow){
+               ele.classList.toggle("dark-mode-header");
+           }
+        }
+    </script>
+
+    <div class="container my-4 contactClassNotToggeDarkMode" id="Contact">
         <div class="jumbotron">
             <h3>Contact Details: <span id="time"></span></h3>
             <p class="lead"> Phone: <a>+91-9415182799</a></p>
@@ -194,13 +231,13 @@
                 itemJsonArray.forEach((element, index) => {
                     str += `
                     <tr>
-                    <th scope="row">${index + 1}</th>
-                    <td>${element[0]}</td>
-                    <td>${element[1]}</td>
-                    <td>${element[2]}</td>
-                    <td>${element[3]}</td> 
-                    <td><button class="btn btn-sm btn-primary" title="Edit Description" onclick="edited(${index})">Edit</button></td> 
-                    <td><button class="btn btn-sm btn-primary" title="Delete This Task" onclick="deleted(${index})">Delete</button></td>
+                    <td class="th" scope="row">${index + 1}</td>
+                    <td class="th">${element[0]}</td>
+                    <td class="th">${element[1]}</td>
+                    <td class="th">${element[2]}</td>
+                    <td class="th">${element[3]}</td> 
+                    <td class="th"><button class="btn btn-sm btn-primary" title="Edit Description" onclick="edited(${index})">Edit</button></td> 
+                    <td class="th"><button class="btn btn-sm btn-primary" title="Delete This Task" onclick="deleted(${index})">Delete</button></td>
                     </tr>`; 
                 });
                 //<td><button class="btn btn-sm btn-primary" onclick="edited(${index})">Edit</button></td>
