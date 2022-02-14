@@ -209,8 +209,9 @@
                     <th class="th" scope="col">Item Description</th>
                     <th class="th" scope="col">From Date</th> 
                     <th class="th" scope="col">To Date</th>
-                    <th class="th" scope="col"></th> 
-                    <th class="th" scope="col"></th> 
+                    <th class="th" scope="col">Edit</th> 
+                    <th class="th" scope="col">Delete</th> 
+                    <th class="th" scope="col">Status</th>
                   </tr>
                 </thead>
                 <tbody id="tableBody">
@@ -309,13 +310,14 @@
                     str += `
                     <tr>
                     <td class="th" scope="row">${index + 1}</td>
-                    <td class="th">${element[0]}</td>
-                    <td class="th">${element[1]}</td>
-                    <td class="th">${element[2]}</td>
-                    <td class="th">${element[3]}</td> 
+                    <td class="th titleName">${element[0]}</td>
+                    <td class="th descName">${element[1]}</td>
+                    <td class="th fromDate">${element[2]}</td>
+                    <td class="th toDate">${element[3]}</td> 
                     <td class="th"><button class="btn btn-sm btn-primary" title="Edit Description" onclick="edited(${index})">Edit</button></td> 
                     <td class="th"><button class="btn btn-sm btn-primary" title="Delete This Task" onclick="deleted(${index})">Delete</button></td>
-                    </tr>`; 
+                    <td class="th" style="text-align:center;"><input class="form-check-input taskDone" type="checkbox" style="position:relative;" value="" onclick="taskDone(${index})"></td>
+                    </tr>`; //checkbox for text-decoration: line-through;
                 });
                 //<td><button class="btn btn-sm btn-primary" onclick="edited(${index})">Edit</button></td>
                 tableBody.innerHTML = str;
@@ -353,11 +355,35 @@
                 else
                 {alert("Nothing Changed!");}
             }
+            function taskDone(itemIndex){
+                checkboxVal=document.getElementsByClassName('taskDone');
+                checkboxIndex=checkboxVal[itemIndex];
+                tableListTitles=document.getElementsByClassName("titleName");
+                tableListDesc=document.getElementsByClassName("descName");
+                tableListFromDate=document.getElementsByClassName("fromDate");
+                tableListToDate=document.getElementsByClassName("toDate");
+                titles=tableListTitles[itemIndex];
+                descri=tableListDesc[itemIndex];
+                FromDateIndex=tableListFromDate[itemIndex];
+                ToDateIndex=tableListToDate[itemIndex];
+                if (checkboxIndex.checked){
+                    titles.style.textDecoration = "line-through";
+                    descri.style.textDecoration = "line-through";
+                    FromDateIndex.style.textDecoration = "line-through";
+                    ToDateIndex.style.textDecoration = "line-through";
+                }
+                else{
+                    titles.style.textDecoration = "None";
+                    descri.style.textDecoration = "None";
+                    FromDateIndex.style.textDecoration = "None";
+                    ToDateIndex.style.textDecoration = "None";
+                }
+        }
             function clearStorage(){
                 if (confirm("Do you areally want to clear?")){
                 console.log('Clearing the storage')
                 localStorage.clear();
-                update()
+                update();
                 }
             }
         </script>
