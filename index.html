@@ -216,6 +216,47 @@
 
             <button   id="add" class="btn btn-primary" title="Add to the list">Add to list</button>
             <button  id="clear" class="btn btn-primary" onclick="clearStorage()" title="Empty The list below">Clear list</button>
+            <button  id="todaysTask" class="btn btn-primary" onclick="GettodaysTask()" title="Empty The list below">See Today's Task</button>
+            <!--modal dialog-->
+            <div id = "dialog-3" title = "Todays Tasks:">This popup dialog will contain today's task</div>
+            <style>
+            input.starTask {
+                border: 0;
+                width: 1px;
+                height: 1px;
+                overflow: hidden;
+                position: absolute !important;
+                clip: rect(1px 1px 1px 1px);
+                clip: rect(1px, 1px, 1px, 1px);
+                opacity: 0;
+              }
+              label.starTask {
+                position: relative;
+                float: right;
+                color: #C8C8C8;
+              }
+              label.starTask:before {
+                margin: 5px;
+                content: "\f005";
+                font-family: FontAwesome;
+                display: inline-block;
+                font-size: 1.5em;
+                color: #ccc;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                user-select: none;
+              }
+              input.starTask:checked ~ label:before {
+                color: #FFC107;
+              }
+              label.starTask:hover ~ label:before {
+                color: #ffdb70;
+              }
+              label.starTask:hover:before {
+                color: #FFC107;
+              }
+              </style>
+
          
         <div>
         <div id="items" class="my-4">
@@ -224,6 +265,7 @@
             <table id="tableOfTask" class="table">
                 <thead>
                   <tr>
+                    <th class="th" scope="col">Priority</th>
                     <th class="th" scope="col">SNo</th>
                     <th class="th" scope="col">Item Title</th>
                     <th class="th" scope="col">Item Description</th>
@@ -236,12 +278,15 @@
                 </thead>
                 <tbody id="tableBody">
                   <tr>
+                    <td scope="row">imp</td>
                     <td scope="row">1</td>
                     <td>Get some Coffee</td>
                     <td>You need coffee as you are a coder</td>
                     <td>You need coffee as you are a coder</td> 
                     <td>You need coffee as you are a coder</td>
                     <td><button class="btn btn-sm btn-primary">Delete</button></td> 
+                    <td><button class="btn btn-sm btn-primary">Delete</button></td> 
+                    <th class="th" scope="col">Status</th>
                   </tr>
                   
                 </tbody>
@@ -339,6 +384,8 @@
                 itemJsonArray.forEach((element, index) => {
                     str += `
                     <tr>
+                    <td class="important" scope="row" style="padding: unset;padding-right: 1.5rem;padding-top: 0.2rem;"><input class="starTask" type="checkbox" id="st${index}" value="1" />
+                    <label class="starTask" for="st${index}"></label></td>
                     <td class="th" scope="row">${index + 1}</td>
                     <td class="th titleName">${element[0]}</td>
                     <td class="th descName">${element[1]}</td>
@@ -428,6 +475,22 @@
             $("#datepicker2").datepicker({ minDate: 0, dateFormat: 'dd-mm-yy'});
             });
         });
+        </script>
+        <script>
+            $(function() {
+               $( "#dialog-3" ).dialog({
+                  autoOpen: false, 
+                  hide: "puff",
+                  show : "slide",
+                  height: 200      
+               });
+               $( "#todaysTask" ).click(function() {
+                  $( "#dialog-3" ).dialog( "open" );
+               });
+               /*$( "#opener-3" ).click(function() {
+                  $( "#dialog-3" ).dialog( "open" );
+               });*/
+            });
         </script>
 </body>
 
