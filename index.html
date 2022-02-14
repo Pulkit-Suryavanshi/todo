@@ -17,10 +17,10 @@
 
     }
 
-    .dark-mode-header{
-    color: white;
+    .dark-mode-table{
+    color: white !important;
     background-color: black;
-    }    
+    }
 
     .contactClassNotToggeDarkMode{
     color:black !important;
@@ -104,6 +104,25 @@
     }
     */
     </style>
+    <script>
+    addEventListener("DOMContentLoaded", function() {
+                let retrievedTheme = localStorage.getItem('darkTheme');
+                if (localStorage.getItem("darkTheme") != null){
+                    let savedPreviousThemeState=JSON.parse(localStorage.getItem("darkTheme"))["darkTheme"];
+                    if(savedPreviousThemeState!=0){
+                        //if 1 then dark
+                        console.log('retrievedObject: ', JSON.parse(retrievedTheme));
+                        DarkToggle();//turn on the dark mode
+                        //now after this call the them will become 0 so change to 1
+                        let darkTheme = { "darkTheme":1};
+                        localStorage.setItem('darkTheme', JSON.stringify(darkTheme));
+                    }
+                }
+            });
+        //window.onload = function() {
+        //JavaScript goes here
+        //}
+    </script>
     
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -201,7 +220,7 @@
         <div id="items" class="my-4">
             <h2>Your Items</h2>
             <div style="overflow-x:auto;">
-            <table class="table">
+            <table id="tableOfTask" class="table">
                 <thead>
                   <tr>
                     <th class="th" scope="col">SNo</th>
@@ -233,18 +252,28 @@
             <iframe src="https://calendar.google.com/calendar/embed?height=350&wkst=1&bgcolor=%23ffffff&ctz=Asia%2FKolkata&showTitle=0&showPrint=0&showTz=0&showCalendars=0&src=ZW4uaW5kaWFuI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%230B8043" style="border-width:0" width="328" height="350" frameborder="0" scrolling="no"></iframe>
         </div>
     </div>
+
     <script>
         function DarkToggle() {
-           var element = document.body;
-           var tableHeader = document.getElementsByClassName("th");
-           var tableRow = document.getElementsByClassName("tr");
-           element.classList.toggle("dark-mode");
-           for(ele of tableHeader){
-               ele.classList.toggle("dark-mode-header");
-           }
-           for(ele of tableRow){
-               ele.classList.toggle("dark-mode-header");
-           }
+            //if dark toggle done first time then set the local storage to have darkTheme:1
+            if (localStorage.getItem("darkTheme") == null){
+                let darkTheme = { "darkTheme":3}; //set temporary number 3 for initialization
+                localStorage.setItem('darkTheme', JSON.stringify(darkTheme));
+            }
+            var element = document.body;
+            var tableBody = document.getElementById("tableOfTask");
+            element.classList.toggle("dark-mode");
+            tableBody.classList.toggle("dark-mode-table");
+            let themeNow=JSON.parse(localStorage.getItem("darkTheme"))["darkTheme"];
+            if (themeNow == 3 || themeNow==0){
+                let darkTheme = { "darkTheme":1};
+                localStorage.setItem('darkTheme', JSON.stringify(darkTheme));
+            }
+            else if(themeNow==1){
+                let darkTheme = { "darkTheme":0};
+                localStorage.setItem('darkTheme', JSON.stringify(darkTheme));
+            }
+
         }
     </script>
 
