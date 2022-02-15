@@ -216,7 +216,7 @@
 
             <button   id="add" class="btn btn-primary" title="Add to the list">Add to list</button>
             <button  id="clear" class="btn btn-primary" onclick="clearStorage()" title="Empty The list below">Clear list</button>
-            <button  id="todaysTask" class="btn btn-primary" onclick="GettodaysTask()" title="Empty The list below">See Today's Task</button>
+            <button  id="todaysTask" class="btn btn-primary" onclick="GettodaysTasks()" title="Get Todays Tasks">See Today's Task</button>
             <!--modal dialog-->
             <div id = "dialog-3" title = "Todays Tasks:">This popup dialog will contain today's task</div>
             <style>
@@ -471,7 +471,38 @@
                 modalStarredTask.innerHTML+="</ol>";
                 if(listCount==0){modalStarredTask.innerHTML="\<strong>No \</strong>⭐Starred task in list.\<br/>This means you have either done it all! Or you're not being productive! 😂👌"}
                 }
-            function GettodaysTask(){}
+            function GettodaysTasks(){
+                let listCountDate=0;
+
+
+                //todays date:
+                var today = new Date();
+                var dd = String(today.getDate()).padStart(2, '0');
+                var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                var yyyy = today.getFullYear();
+                today = yyyy+'/'+mm+'/'+dd;
+                console.log(today);
+                dateToday = new Date(today);
+
+
+                let listfromDate=document.getElementsByClassName("fromDate");
+                let modalTodaysTask=document.getElementById("dialog-3");
+                modalTodaysTask.innerHTML="Today's Tasks Summary:\<br>\<ol>";
+                for(let i = 0; i < listfromDate.length; i++){
+                    fromDate=listfromDate[i].innerHTML;"16-02-2022"
+                    d=fromDate.slice(0,2);
+                    m=fromDate.slice(3,5);
+                    y=fromDate.slice(6);
+                    frmDate = new Date(y+'/'+m+'/'+d);
+                    if(frmDate!=""&&frmDate!=null&&frmDate!="//"&&frmDate<=dateToday){
+                        listCountDate+=1;
+                        modalTodaysTask.innerHTML+="<li>"+document.getElementsByClassName("titleName")[i].innerHTML+"</li><br/>";
+                    }
+                }
+                modalTodaysTask.innerHTML+="</ol>";
+                if(listCountDate==0){modalTodaysTask.innerHTML="\<strong>No task for today.\<br/>Take some time off."}
+            }
+
             function clearStorage(){
                 if (confirm("Do you areally want to clear?")){
                 console.log('Clearing the storage')
