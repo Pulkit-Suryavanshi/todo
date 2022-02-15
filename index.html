@@ -218,7 +218,7 @@
             <button  id="clear" class="btn btn-primary" onclick="clearStorage()" title="Empty The list below">Clear list</button>
             <button  id="todaysTask" class="btn btn-primary" onclick="GettodaysTasks()" title="Get Todays Tasks">See Today's Task</button>
             <!--modal dialog-->
-            <div id = "dialog-3" title = "Todays Tasks:">This popup dialog will contain today's task</div>
+            <div class="modalDialog" id = "dialog-3" title = "Todays Tasks:">This popup dialog will contain today's task</div>
             <style>
             /*following for star*/
             input.starTask {
@@ -500,7 +500,7 @@
                     }
                 }
                 modalTodaysTask.innerHTML+="</ol>";
-                if(listCountDate==0){modalTodaysTask.innerHTML="\<strong>No task for today.\<br/>Take some time off."}
+                if(listCountDate==0){modalTodaysTask.innerHTML="\<strong>No tasks for today.\<br/>Take some time off."}
             }
 
             function clearStorage(){
@@ -529,7 +529,7 @@
                   autoOpen: false, 
                   hide: "puff",
                   show : "slide",
-                  height: 200      
+                  height: 300      
                });
                $( "#todaysTask" ).click(function() {
                   $( "#dialog-3" ).dialog( "open" );
@@ -543,7 +543,7 @@
                   autoOpen: false, 
                   hide: "puff",
                   show : "slide",
-                  height: 200      
+                  height: 300      
                });
                $( "#starredTask" ).click(function() {
                   $( "#dialog-4" ).dialog( "open" );
