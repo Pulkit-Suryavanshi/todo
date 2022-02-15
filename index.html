@@ -291,7 +291,7 @@
 
         <!--starred task-->
         <button  id="starredTask" class="btn btn-primary" onclick="GetStarredTask()" title="Empty The list below">See Starred Task</button>
-        <div id = "dialog-4" title = "Todays Tasks:">This popup dialog will contain Starred ⭐ task</div>
+        <div id = "dialog-4" title = "Starred Tasks:">Starred task modal popup</div>
         </div>  
         <br/>
         <div>
@@ -457,17 +457,21 @@
                 }
             }
             function GetStarredTask(){
+                listCount=0;
                 let listStarredTaskAll=document.getElementsByClassName("starTaskGet");
                 //console.log(starredTask[0].checked);
                 let modalStarredTask=document.getElementById("dialog-4");
-                modalStarredTask.innerHTML="<ul>";
+                modalStarredTask.innerHTML="Starred Items Summary:\<br>\<ol>";
                 for(let i = 0; i < listStarredTaskAll.length; i++){
                     if(listStarredTaskAll[i].checked){
+                        listCount+=1;
                         modalStarredTask.innerHTML+="<li>"+document.getElementsByClassName("titleName")[i].innerHTML+"</li><br/>";
                     }
                 }
-                modalStarredTask.innerHTML+="</ul>";
-            }
+                modalStarredTask.innerHTML+="</ol>";
+                if(listCount==0){modalStarredTask.innerHTML="\<strong>No \</strong>⭐Starred task in list.\<br/>This means you have either done it all! Or you're not being productive! 😂👌"}
+                }
+            function GettodaysTask(){}
             function clearStorage(){
                 if (confirm("Do you areally want to clear?")){
                 console.log('Clearing the storage')
