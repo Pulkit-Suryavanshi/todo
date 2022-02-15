@@ -288,7 +288,12 @@
               </table>
             </div>
         </div>
+
+        <!--starred task-->
+        <button  id="starredTask" class="btn btn-primary" onclick="GetStarredTask()" title="Empty The list below">See Starred Task</button>
+        <div id = "dialog-4" title = "Todays Tasks:">This popup dialog will contain Starred ⭐ task</div>
         </div>  
+        <br/>
         <div>
             <iframe src="https://calendar.google.com/calendar/embed?height=350&wkst=1&bgcolor=%23ffffff&ctz=Asia%2FKolkata&showTitle=0&showPrint=0&showTz=0&showCalendars=0&src=ZW4uaW5kaWFuI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%230B8043" style="border-width:0" width="328" height="350" frameborder="0" scrolling="no"></iframe>
         </div>
@@ -379,7 +384,7 @@
                 itemJsonArray.forEach((element, index) => {
                     str += `
                     <tr>
-                    <td class="important" scope="row" style="padding: unset;padding-right: 1.5rem;padding-top: 0.2rem;"><input class="starTask" type="checkbox" id="st${index}" value="1" />
+                    <td class="important" scope="row" style="padding: unset;padding-right: 1.5rem;padding-top: 0.2rem;"><input class="starTask starTaskGet" type="checkbox" id="st${index}" value="1" />
                     <label class="starTask" for="st${index}"></label></td>
                     <td class="th" scope="row">${index + 1}</td>
                     <td class="th titleName">${element[0]}</td>
@@ -450,7 +455,19 @@
                     FromDateIndex.style.textDecoration = "None";
                     ToDateIndex.style.textDecoration = "None";
                 }
-        }
+            }
+            function GetStarredTask(){
+                let listStarredTaskAll=document.getElementsByClassName("starTaskGet");
+                //console.log(starredTask[0].checked);
+                let modalStarredTask=document.getElementById("dialog-4");
+                modalStarredTask.innerHTML="<ul>";
+                for(let i = 0; i < listStarredTaskAll.length; i++){
+                    if(listStarredTaskAll[i].checked){
+                        modalStarredTask.innerHTML+="<li>"+document.getElementsByClassName("titleName")[i].innerHTML+"</li><br/>";
+                    }
+                }
+                modalStarredTask.innerHTML+="</ul>";
+            }
             function clearStorage(){
                 if (confirm("Do you areally want to clear?")){
                 console.log('Clearing the storage')
@@ -481,6 +498,20 @@
                });
                $( "#todaysTask" ).click(function() {
                   $( "#dialog-3" ).dialog( "open" );
+               });
+               /*$( "#opener-3" ).click(function() {
+                  $( "#dialog-3" ).dialog( "open" );
+               });*/
+            });
+            $(function() {
+               $( "#dialog-4" ).dialog({
+                  autoOpen: false, 
+                  hide: "puff",
+                  show : "slide",
+                  height: 200      
+               });
+               $( "#starredTask" ).click(function() {
+                  $( "#dialog-4" ).dialog( "open" );
                });
                /*$( "#opener-3" ).click(function() {
                   $( "#dialog-3" ).dialog( "open" );
