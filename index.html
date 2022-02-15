@@ -384,7 +384,7 @@
                 itemJsonArray.forEach((element, index) => {
                     str += `
                     <tr>
-                    <td class="important" scope="row" style="padding: unset;padding-right: 1.5rem;padding-top: 0.2rem;"><input class="starTask starTaskGet" type="checkbox" id="st${index}" value="1" />
+                    <td class="important" scope="row" style="padding: unset;padding-right: 1.5rem;padding-top: 0.2rem;"><input class="starTask starTaskGet" type="checkbox" id="st${index}" value="1"  onchange="starSound(${index})"/>
                     <label class="starTask" for="st${index}"></label></td>
                     <td class="th" scope="row">${index + 1}</td>
                     <td class="th titleName">${element[0]}</td>
@@ -552,6 +552,23 @@
                   $( "#dialog-3" ).dialog( "open" );
                });*/
             });
+            /*function starSound(){
+                var audio = new Audio('facebook new message pop ding.mp3');
+                audio.play();
+            }*/
+            function starSound(elementIndex){
+            var audio = new Audio('starChecked.mp3');
+            audio.oncanplay = function() {
+            let id=("st"+elementIndex).toString();;
+            if (document.getElementById(id).checked) this.play()
+            }
+            function myfunction(el) {    
+                if (el.checked) {
+                audio.load();
+                }
+            }
+            }
+
         </script>
 </body>
 
