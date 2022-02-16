@@ -119,6 +119,7 @@
                         document.getElementById("chk").checked=true;
                     }
                 }
+                setStar(); //to set star using local storage
             });
         //window.onload = function() {
         //JavaScript goes here
@@ -350,7 +351,7 @@
                 console.log("Updating List...");
                 tit = document.getElementById('title').value;
                 desc = document.getElementById('description').value;
-                if(tit && desc != "")
+                if(tit && desc != "")//check if title or description not entered
                 {
                     from = document.getElementById('datepicker1').value;
                     to = document.getElementById('datepicker2').value;
@@ -386,7 +387,7 @@
                     str += `
                     <tr>
                     <td class="important" scope="row" style="padding: unset;padding-right: 1.5rem;padding-top: 0.2rem;">
-                        <input class="starTask starTaskGet" type="checkbox" id="st${index}" value="1"  onchange="starSound(${index})"/>
+                        <input class="starTask starTaskGet starTaskSave" type="checkbox" id="st${index}" value="1"  onchange="starSound(${index})" onclick="saveStar(${index})"/>
                         <label class="starTask" for="st${index}"></label>
                     </td>
                     <td class="th" scope="row">${index + 1}</td>
@@ -512,10 +513,39 @@
                 if(listCountDate==0){modalTodaysTask.innerHTML="\<strong>No tasks for today.\<br/>Take some time off."}
             }
 
+            function saveStar(starIndex){
+                if (localStorage.getItem('indexToStarJson')==null){
+                    indexToStar = []; 
+                } 
+                else{
+                    itemJsonArrayStr = localStorage.getItem('indexToStarJson');
+                    indexToStar = JSON.parse(itemJsonArrayStr); 
+                }
+                if(indexToStar.includes(starIndex)){indexToStar = indexToStar.filter(item => item !== starIndex);console.log(indexToStar);}
+                else{indexToStar.push(starIndex);console.log(indexToStar);}
+                //save this indexToStar in local storage
+                localStorage.setItem('indexToStarJson', JSON.stringify(indexToStar));
+
+            }
+            //function to set star on reload saving
+            function setStar(){
+                if (localStorage.getItem('indexToStarJson')!=null){
+                    itemJsonArrayStr = localStorage.getItem('indexToStarJson');
+                    indexToStar = JSON.parse(itemJsonArrayStr);
+                    let starringList=document.getElementsByClassName("starTaskSave");
+                    for(let i=0;i<=starringList.length;i++){
+                        if(itemJsonArrayStr.includes(i)){
+                        starringList[i].checked=true;}
+                    }
+                }
+            }
+
             function clearStorage(){
-                if (confirm("Do you areally want to clear?")){
-                console.log('Clearing the storage')
-                localStorage.clear();
+                if (confirm("Do you areally want to clear the list?")){
+                //console.log('Clearing the storage')
+                localStorage.removeItem("itemsJson");//removing list
+                localStorage.removeItem("indexToStarJson");//removing star
+                //localStorage.clear(); //clearing entire storage
                 update();
                 }
             }
