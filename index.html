@@ -216,6 +216,7 @@
 
             <button   id="add" class="btn btn-primary" title="Add to the list">Add to list</button>
             <button  id="clear" class="btn btn-primary" onclick="clearStorage()" title="Empty The list below">Clear list</button>
+            <br/><br/>
             <button  id="todaysTask" class="btn btn-primary" onclick="GettodaysTasks()" title="Get Todays Tasks">See Today's Task</button>
             <!--modal dialog-->
             <div class="modalDialog" id = "dialog-3" title = "Todays Tasks:">This popup dialog will contain today's task</div>
@@ -384,16 +385,24 @@
                 itemJsonArray.forEach((element, index) => {
                     str += `
                     <tr>
-                    <td class="important" scope="row" style="padding: unset;padding-right: 1.5rem;padding-top: 0.2rem;"><input class="starTask starTaskGet" type="checkbox" id="st${index}" value="1"  onchange="starSound(${index})"/>
-                    <label class="starTask" for="st${index}"></label></td>
+                    <td class="important" scope="row" style="padding: unset;padding-right: 1.5rem;padding-top: 0.2rem;">
+                        <input class="starTask starTaskGet" type="checkbox" id="st${index}" value="1"  onchange="starSound(${index})"/>
+                        <label class="starTask" for="st${index}"></label>
+                    </td>
                     <td class="th" scope="row">${index + 1}</td>
                     <td class="th titleName">${element[0]}</td>
                     <td class="th descName">${element[1]}</td>
                     <td class="th fromDate">${element[2]}</td>
                     <td class="th toDate">${element[3]}</td> 
-                    <td class="th"><button class="btn btn-sm btn-primary" title="Edit Description" onclick="edited(${index})">Edit</button></td> 
-                    <td class="th"><button class="btn btn-sm btn-primary" title="Delete This Task" onclick="deleted(${index})">Delete</button></td>
-                    <td class="th" style="text-align:center;"><input class="form-check-input taskDone" type="checkbox" style="position:relative;" value="" onclick="taskDone(${index})"></td>
+                    <td class="th">
+                        <button class="btn btn-sm btn-primary" title="Edit Description" onclick="edited(${index})">Edit</button>
+                    </td> 
+                    <td class="th">
+                        <button class="btn btn-sm btn-primary" title="Delete This Task" onclick="deleted(${index})">Delete</button>
+                    </td>
+                    <td class="th" style="text-align:center;">
+                        <input class="form-check-input taskDone" type="checkbox" style="position:relative;" value="" onclick="taskDone(${index})">
+                    </td>
                     </tr>`; //checkbox for text-decoration: line-through;
                 });
                 //<td><button class="btn btn-sm btn-primary" onclick="edited(${index})">Edit</button></td>
@@ -465,10 +474,10 @@
                 for(let i = 0; i < listStarredTaskAll.length; i++){
                     if(listStarredTaskAll[i].checked){
                         listCount+=1;
-                        modalStarredTask.innerHTML+="<li>"+document.getElementsByClassName("titleName")[i].innerHTML+"</li><br/>";
+                        modalStarredTask.innerHTML+="<li>\<strong>"+document.getElementsByClassName("titleName")[i].innerHTML+"\</strong>:"+document.getElementsByClassName("descName")[i].innerHTML+"\</li>\<br/>";
                     }
                 }
-                modalStarredTask.innerHTML+="</ol>";
+                modalStarredTask.innerHTML+="\</ol>";
                 if(listCount==0){modalStarredTask.innerHTML="\<strong>No \</strong>⭐Starred task in list.\<br/>This means you have either done it all! Or you're not being productive! 😂👌"}
                 }
             function GettodaysTasks(){
@@ -496,7 +505,7 @@
                     frmDate = new Date(y+'/'+m+'/'+d);
                     if(frmDate!=""&&frmDate!=null&&frmDate!="//"&&frmDate<=dateToday){
                         listCountDate+=1;
-                        modalTodaysTask.innerHTML+="<li>"+document.getElementsByClassName("titleName")[i].innerHTML+"</li><br/>";
+                        modalTodaysTask.innerHTML+="\<li>\<strong>"+document.getElementsByClassName("titleName")[i].innerHTML+"\</strong>:"+document.getElementsByClassName("descName")[i].innerHTML+"</li><br/>";
                     }
                 }
                 modalTodaysTask.innerHTML+="</ol>";
@@ -528,7 +537,7 @@
                $( "#dialog-3" ).dialog({
                   autoOpen: false, 
                   hide: "puff",
-                  show : "slide",
+                  show : "clip",
                   height: 300      
                });
                $( "#todaysTask" ).click(function() {
@@ -541,7 +550,7 @@
             $(function() {
                $( "#dialog-4" ).dialog({
                   autoOpen: false, 
-                  hide: "puff",
+                  hide: "clip",
                   show : "slide",
                   height: 300      
                });
