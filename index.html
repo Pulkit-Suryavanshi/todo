@@ -367,8 +367,13 @@
                         localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray))
                     }
                     update();
+                    resetMinMaxDatePicker();
                 }
                 else{alert("Please enter a Title and Description");}
+            }
+            function resetMinMaxDatePicker(){
+                $( "#datepicker1" ).datepicker( "option", "maxDate", null);
+                $( "#datepicker2" ).datepicker( "option", "minDate", null);
             }
 
             function update(){
@@ -506,7 +511,7 @@
                     frmDate = new Date(y+'/'+m+'/'+d);
                     if(frmDate!=""&&frmDate!=null&&frmDate!="//"&&frmDate<=dateToday){
                         listCountDate+=1;
-                        modalTodaysTask.innerHTML+="\<li>\<strong>"+document.getElementsByClassName("titleName")[i].innerHTML+"\</strong>:"+document.getElementsByClassName("descName")[i].innerHTML+"</li><br/>";
+                        modalTodaysTask.innerHTML+="\<strong>"+listCountDate+". "+document.getElementsByClassName("titleName")[i].innerHTML+"\</strong>:"+document.getElementsByClassName("descName")[i].innerHTML+"<br/>";
                     }
                 }
                 modalTodaysTask.innerHTML+="</ol>";
