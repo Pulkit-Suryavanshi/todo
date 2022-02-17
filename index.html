@@ -210,9 +210,9 @@
 
             <!--datepicker-->
             <div class="form-group">
-            <p style="display: inline;" id="DateFrom">From: <input style="width:auto;" class="form-control" type="text" id="datepicker1" placeholder="Task Start date"></p>
+            <p style="display: inline;" id="DateFrom">From: <input style="width:auto;" class="form-control" type="text" id="datepicker1" placeholder="Task Start date" autocomplete="off"></p>
             <br/>
-            <p style="display: inline;" id="DateTo">To: <input style="width:auto;" class="form-control" type="text" id="datepicker2" placeholder="Task End Date"></p>
+            <p style="display: inline;" id="DateTo">To: <input style="width:auto;" class="form-control" type="text" id="datepicker2" placeholder="Task End Date" autocomplete="off"></p>
             </div>
 
             <button   id="add" class="btn btn-primary" title="Add to the list">Add to list</button>
@@ -351,10 +351,10 @@
                 console.log("Updating List...");
                 tit = document.getElementById('title').value;
                 desc = document.getElementById('description').value;
+                from = document.getElementById('datepicker1').value;
+                to = document.getElementById('datepicker2').value;
                 if(tit && desc != "")//check if title or description not entered
                 {
-                    from = document.getElementById('datepicker1').value;
-                    to = document.getElementById('datepicker2').value;
                     if (localStorage.getItem('itemsJson')==null){
                         itemJsonArray = [];
                         itemJsonArray.push([tit, desc, from, to]);
@@ -539,6 +539,63 @@
                     }
                 }
             }
+            //function to save taskDone
+            // function saveTaskDone(starIndex){
+            //     if (localStorage.getItem('indexToStarJson')==null){
+            //         indexToStar = []; 
+            //     } 
+            //     else{
+            //         itemJsonArrayStr = localStorage.getItem('indexToStarJson');
+            //         indexToStar = JSON.parse(itemJsonArrayStr); 
+            //     }
+            //     if(indexToStar.includes(starIndex)){indexToStar = indexToStar.filter(item => item !== starIndex);console.log(indexToStar);}
+            //     else{indexToStar.push(starIndex);console.log(indexToStar);}
+            //     //save this indexToStar in local storage
+            //     localStorage.setItem('indexToStarJson', JSON.stringify(indexToStar));
+
+            // }
+
+
+            //function to set taskDone
+            // function settaskDone(){
+            //     if (localStorage.getItem('indexToStarJson')!=null){
+            //         itemJsonArrayStr = localStorage.getItem('indexToStarJson');
+            //         indexToStar = JSON.parse(itemJsonArrayStr);
+            //         let starringList=document.getElementsByClassName("starTaskSave");
+            //         for(let i=0;i<=starringList.length;i++){
+            //             if(itemJsonArrayStr.includes(i)){
+            //             starringList[i].checked=true;}
+            //         }
+            //     }
+            // }
+
+//             h1 {
+//     font-size: 1rem;
+// }
+
+// @media (min-width: 400px) {
+//     h1 {
+//         font-size: 1.3rem;
+//     }
+// }
+
+// @media (min-width: 600px) {
+//     h1 {
+//         font-size: 1.6rem;
+//     }
+// }
+
+// @media (min-width: 800px) {
+//     h1 {
+//         font-size: 1.9rem;
+//     }
+// }
+
+// @media (min-width: 1000px) {
+//     h1 {
+//         font-size: 2.2rem;
+//     }
+// }
 
             function clearStorage(){
                 if (confirm("Do you areally want to clear the list?")){
@@ -557,8 +614,16 @@
         <script>
         $(document).ready(function() {
             $( function() {
-              $("#datepicker1").datepicker({ minDate: 0, dateFormat: 'dd-mm-yy'});
-            $("#datepicker2").datepicker({ minDate: 0, dateFormat: 'dd-mm-yy'});
+              $("#datepicker1").datepicker({ minDate: 0, dateFormat: 'dd-mm-yy',changeYear:true,
+              onSelect: function(selected) {
+                    $("#datepicker2").datepicker("option","minDate", selected)
+                }
+            });
+            $("#datepicker2").datepicker({ minDate: 0, dateFormat: 'dd-mm-yy',changeYear:true,
+            onSelect: function(selected) {
+                $("#datepicker1").datepicker("option","maxDate", selected)
+                }
+            });
             });
         });
         </script>
