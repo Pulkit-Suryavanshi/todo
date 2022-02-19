@@ -437,7 +437,19 @@
                 // Delete itemIndex element from the array
                 itemJsonArray.splice(itemIndex, 1);
                 localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray));
-                update();
+                //deleted items star index to be removed
+                itemJsonArrayStr = localStorage.getItem('indexToStarJson');
+                indexToStar = JSON.parse(itemJsonArrayStr);
+                indexToStar.splice(itemIndex-1,1);//removing index-1
+                console.log(indexToStar);
+                localStorage.setItem('indexToStarJson', JSON.stringify(indexToStar));
+
+
+
+
+
+                update();//update the list
+                setStar();//set star after delete
 
             }
             function edited(itemIndex){
@@ -534,7 +546,10 @@
                     itemJsonArrayStr = localStorage.getItem('indexToStarJson');
                     indexToStar = JSON.parse(itemJsonArrayStr); 
                 }
-                if(indexToStar.includes(starIndex)){indexToStar = indexToStar.filter(item => item !== starIndex);console.log(indexToStar);}
+                if(indexToStar.includes(starIndex)){
+                    indexToStar = indexToStar.filter(item => item !== starIndex);
+                    console.log(indexToStar);
+                }
                 else{indexToStar.push(starIndex);console.log(indexToStar);}
                 //save this indexToStar in local storage
                 localStorage.setItem('indexToStarJson', JSON.stringify(indexToStar));
