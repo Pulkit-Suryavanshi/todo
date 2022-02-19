@@ -6,6 +6,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <style>
+        /**
+             * !this is alert comment
+             * ? this is question comment
+             * TODO: This is a todo comment
+             * *this is normal comment
+             * NOW ALSO RENAME TAGS EASILY
+             * */
     body {
     background-color: white;
     color: black;
@@ -366,7 +373,8 @@
                         itemJsonArray.push([tit, desc, from, to]);
                         localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray))
                     }
-                    update();
+                    update();//update local storage
+                    setStar();//set the stars after updating
                     resetMinMaxDatePicker();
                 }
                 else{alert("Please enter a Title and Description");}
@@ -677,7 +685,6 @@
                 }
             }
             }
-
         </script>
 </body>
 
