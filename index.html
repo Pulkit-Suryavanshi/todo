@@ -15,17 +15,20 @@
              * */
     body {
     background-color: white;
+    transition: all .5s linear;/*slowly changing color*/
     color: black;
     }
     
     .dark-mode {
     background-color: #041C32;
+    transition: all 1s linear;/*slowly changing color*/
     color: white;
 
     }
 
     .dark-mode-table{
     color: white !important;
+    transition: all 1s linear;/*slowly changing color*/
     background-color: black;
     }
 
@@ -110,6 +113,15 @@
     border: none;
     }
     */
+    /* If the screen size is 600px wide or less, hide the element */
+    @media screen and (max-width: 700px) {
+    .top-heading,.from-to {
+        display: none;
+    }
+    .DatesEntry{
+        width: 50% !important;
+    }
+    }
     </style>
     <script>
     addEventListener("DOMContentLoaded", function() {
@@ -197,9 +209,9 @@
     </nav>
 
     <div class="container my-8">
-        <h2 class="text-center">TODOs List</h2>
+        <h2 class="text-center top-heading">TODOs List</h2>
          
-            <div class="form-group">
+            <div class="form-group" style="padding-top: 1rem;">
                 <label for="title">Title</label>
                 <input type="text" class="form-control" id="title" aria-describedby="emailHelp" placeholder="Add Task here">
                 <small id="emailHelp" class="form-text text-muted">Add an item to the list</small>
@@ -217,9 +229,9 @@
 
             <!--datepicker-->
             <div class="form-group">
-            <p style="display: inline;" id="DateFrom">From: <input style="width:auto;" class="form-control" type="text" id="datepicker1" placeholder="Task Start date" autocomplete="off" readonly="readonly"></p>
+            <p style="display: inline;" id="DateFrom"><strong class="from-to">From:</strong><input style="width:auto;" class="form-control" type="text" id="datepicker1" placeholder="From Date" autocomplete="off" readonly="readonly"></p>
             <br/>
-            <p style="display: inline;" id="DateTo">To: <input style="width:auto;" class="form-control" type="text" id="datepicker2" placeholder="Task End Date" autocomplete="off" readonly="readonly"></p>
+            <p style="display: inline;" id="DateTo"><strong class="from-to">To:</strong><input style="width:auto;" class="form-control" type="text" id="datepicker2" placeholder="To Date" autocomplete="off" readonly="readonly"></p>
             </div>
 
             <button   id="add" class="btn btn-primary" title="Add to the list">Add to list</button>
