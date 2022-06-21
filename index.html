@@ -123,6 +123,15 @@
         .DatesEntry {
           width: 50% !important;
         }
+        /* .resizeTable{
+          max-width: 100px;
+          min-width: 100px
+          -webkit-transform:scale(0.7);
+          -moz-transform:scale(0.7);
+          -ms-transform:scale(0.7);
+          transform:scale(0.8);
+          transform:scaleX(0.8);
+        } */
       }
     </style>
     <script>
@@ -382,7 +391,7 @@
       <div>
         <div id="items" class="my-4">
           <h2>Your Items</h2>
-          <div style="overflow-x: auto">
+          <div style="overflow-x: auto" class="resizeTable">
             <table id="tableOfTask" class="table">
               <thead>
                 <tr>
@@ -609,7 +618,14 @@
         setStar(); //set star after delete
       }
       function edited(itemIndex) {
-        let newDescription = prompt("You can Edit the description only:");
+        tableListTitles = document.getElementsByClassName("titleName");
+        title = tableListTitles[itemIndex];
+        promptDefaultTitleText=title.innerText; 
+        tableListDesc = document.getElementsByClassName("descName");       
+        descri = tableListDesc[itemIndex];
+        promptDefaultDescriptionText=descri.innerText;
+        //console.log(promtDefaultDescriptionText);
+        let newDescription = prompt("You can ONLY Edit the description of: "+promptDefaultTitleText,promptDefaultDescriptionText);
         if (
           newDescription != "" &&
           newDescription != null &&
